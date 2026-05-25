@@ -474,46 +474,114 @@ h2{
     text-align: center;
 }
 
+/* ==========================================================================
+   📱 ADAPTABILIDAD MÓVIL (MEDIA QUERIES) - CORREGIDO
+   ========================================================================== */
 @media (max-width: 768px) {
-    .nav-toggle {
-        display: flex; /* Muestra el botón de hamburguesa en celular */
+    /* Asegurar que la navbar mantenga su tamaño y no aplaste el contenido */
+    .navbar {
+        padding: 1rem;
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1000;
     }
 
-    .nav-menu {
-        position: absolute;
-        top: 60px; /* Ajusta esto según el alto de tu navbar */
-        right: -100%; /* Esconde el menú completamente a la derecha */
-        flex-direction: column;
-        background-color: #ffffff;
+    .nav-container {
         width: 100%;
-        max-width: 300px; /* Tamaño del menú lateral */
-        height: calc(100vh - 60px);
-        padding: 30px;
-        box-shadow: -4px 0 10px rgba(0,0,0,0.1);
-        transition: right 0.4s ease; /* Efecto deslizante suave */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    /* Forzar que el botón de hamburguesa sea visible */
+    .nav-toggle {
+        display: flex !important; /* Fuerza su aparición en móviles */
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        z-index: 2001; /* Por encima de la lista del menú */
+    }
+
+    .nav-toggle .bar {
+        width: 100%;
+        height: 3px;
+        background-color: var(--blanco) !important; /* Líneas blancas visibles sobre el fondo verde */
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+    /* Menú lateral móvil corregido */
+    .nav-menu {
+        position: fixed;
+        top: 60px; /* Ajusta exactamente debajo de tu barra verde */
+        right: -100%; /* Totalmente escondido a la derecha por defecto */
+        flex-direction: column;
+        background-color: var(--verde-principal); /* Mismo verde corporativo */
+        width: 280px; /* Ancho fijo para que no cubra toda la pantalla */
+        height: calc(100vh - 60px); /* Ocupa el resto de la pantalla del celular */
+        padding: 40px 25px;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+        transition: right 0.4s cubic-bezier(0.1, 0.8, 0.3, 1);
         align-items: flex-start;
         gap: 25px;
+        z-index: 2000;
     }
 
-    /* Agrupa los botones uno abajo del otro en el celular */
+    /* Clase activa que empuja el menú a la pantalla cuando tocas la hamburguesa */
+    .nav-menu.active {
+        right: 0 !important;
+    }
+
+    /* Enlaces dentro del menú móvil */
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu a {
+        display: block;
+        width: 100%;
+        font-size: 1.1rem;
+        padding: 10px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria sutil */
+    }
+
+    /* Bloques de Login / Registro en vertical */
     .user-menu-group {
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
-        gap: 15px;
+        gap: 20px;
     }
 
-    .user-menu-group a, .user-menu-group button {
+    .user-menu-group a, 
+    .user-menu-group button {
         width: 100%;
         text-align: center;
+        margin: 0;
     }
 
-   
-    .nav-menu.active {
-        right: 0;
+    .btn-register {
+        background-color: var(--blanco);
+        color: var(--verde-principal) !important;
+        text-align: center;
+        width: 100%;
+        padding: 12px;
     }
 
-   
+    .btn-login {
+        text-align: center;
+        width: 100%;
+        padding: 12px;
+        border: 1px solid var(--blanco);
+        border-radius: 5px;
+    }
+
+    /* Animación de las tres barras convirtiéndose en X */
     .nav-toggle.active .bar:nth-child(1) {
         transform: translateY(9px) rotate(45deg);
     }
