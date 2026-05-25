@@ -173,11 +173,41 @@ function cargarMisPacks(usuarios_id) {
                         <div class="badge-cantidad">${pack.cantidad} disponibles</div>
                         <p>Horario: ${pack.horaRecogida}</p>
                         <p class="direccion-texto">📍 ${pack.direccionRecogida || 'Dirección no disponible'}</p>
-                        <button style="background:#e74c3c">Eliminar</button>
+                        // Busca donde se genera tu tarjeta y cambia el botón para que quede así:
+                        <button onclick="eliminarProducto(${pack.id})" class="btn-logout" style="width: 100%; margin-top: 10px;"> Eliminar</button>
                     </div>
                 `;
             });
         });
+}
+
+async function eliminarProducto(id) {
+    // 1. Alerta de confirmación para evitar que se borre por accidente
+    const confirmar = confirm("¿Estás seguro de que deseas eliminar esta publicación de EcoFood?");
+    if (!confirmar) return;
+
+    try {
+        // 2. Hace la petición DELETE a la ruta que creamos en el backend
+        const respuesta = await fetch(`/api/packs/${id}`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const datos = await respuesta.json();
+
+        if (respuesta.ok) {
+            alert("¡Publicación eliminada con éxito!");
+            location.reload(); // Recarga la página para que desaparezca la tarjeta
+        } else {
+            alert(`Error: ${datos.mensaje}`);
+        }
+
+    } catch (error) {
+        console.error("Error al conectar con el servidor:", error);
+        alert("Hubo un problema de red al intentar eliminar el pack.");
+    }
 }
 
         
