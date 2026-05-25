@@ -1,15 +1,14 @@
-const mysql = require('mysql2'); // o 'mysql' según uses
+const MySQL = requerir('mysql2');
 
-const pool = mysql.createPool({
+const pool = MySQL.crearPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     port: process.env.DB_PORT,
-    // 🔽 ¡ESTA ES LA CONFIGURACIÓN CLAVE QUE FALTA! 🔽
     ssl: {
         rejectUnauthorized: false
     }
 });
 
-module.exports = pool; // o export default
+módulo.exportaciones = pool.promesa();
