@@ -10,22 +10,33 @@
 <body>
     
 
-    <nav class="navbar">
+ <nav class="navbar">
     <div class="nav-container">
         <a href="index.html" class="logo">🌱 ECOFOOD</a>
         
-        <ul class="nav-menu">
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        
+        <ul class="nav-menu" id="nav-menu">
             <li><a href="index.html">Inicio</a></li>
-            <li><a href="panel.html" class="active">Mi Panel</a></li>
+            
+            <li id="menu-invitado" class="user-menu-group">
+                <a href="login.html" class="btn-login">Iniciar Sesión</a>
+                <a href="registro.html" class="btn-register">Registrarse</a>
+            </li>
 
-            <li class="user-menu-group">
+            <li id="menu-usuario" class="user-menu-group" style="display: none;">
+                <a href="panel.html">Mi Panel</a>
                 <span id="nombre-negocio-nav" class="user-badge"></span>
-                <button onclick="cerrarSesion()" style="background: #e74c3c; max-width: 150px; margin-top: 5px;">Cerrar Sesión</button>
-                <!--<button onclick="cerrarSesion()" class="btn-logout">Salir</button> -->
+                <button onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</button>
             </li>
         </ul>
-    </div>
-</nav>
+     </div>
+  </nav>
+
 
 <header>
         <h1> </h1>
