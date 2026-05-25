@@ -204,19 +204,21 @@ button:hover {
 }
 
 .navbar {
-    background-color: #ffffff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: var(--verde-principal);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     position: sticky;
     top: 0;
     z-index: 1000;
+    width: 100%;
 }
 .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 15px 20px;
+    width: 100%;
 }
 
 .logo {
@@ -227,10 +229,17 @@ button:hover {
 }
 
 .nav-menu {
+    list-style: none;
     display: flex;
     align-items: center;
-    list-style: none;
     gap: 20px;
+}
+
+.nav-menu a {
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
 }
 
 .user-menu-group {
@@ -240,23 +249,26 @@ button:hover {
 }
 
 .nav-toggle {
-    display: none;
+    display: none; /* Oculto en computadoras de escritorio */
     flex-direction: column;
     justify-content: space-between;
     width: 30px;
-    height: 21px;
+    height: 20px;
     background: transparent;
     border: none;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 2001;
+    padding: 0;
 }
+
 .nav-toggle .bar {
     width: 100%;
     height: 3px;
-    background-color: #333;
-    border-radius: 5px;
+    background-color: #ffffff !important; /* Fuerza el color blanco como la imagen */
+    border-radius: 2px;
     transition: all 0.3s ease;
 }
+
 .nav-menu a:hover {
     opacity: 0.8;
 }
@@ -474,57 +486,26 @@ h2{
     text-align: center;
 }
 
-/* ==========================================================================
-   📱 ADAPTABILIDAD MÓVIL (MEDIA QUERIES) - CORREGIDO
-   ========================================================================== */
 @media (max-width: 768px) {
-    /* Asegurar que la navbar mantenga su tamaño y no aplaste el contenido */
     .navbar {
-        padding: 1rem;
-        position: sticky;
-        top: 0;
-        width: 100%;
-        z-index: 1000;
+        padding: 1rem 1.5rem;
     }
 
-    .nav-container {
-        width: 100%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    /* Forzar que el botón de hamburguesa sea visible */
+    /* ❗ FUERZA A QUE EL BOTÓN APAREZCA EN EL CELULAR ❗ */
     .nav-toggle {
-        display: flex !important; /* Fuerza su aparición en móviles */
-        flex-direction: column;
-        justify-content: space-between;
-        width: 30px;
-        height: 21px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        z-index: 2001; /* Por encima de la lista del menú */
+        display: flex !important; 
     }
 
-    .nav-toggle .bar {
-        width: 100%;
-        height: 3px;
-        background-color: var(--blanco) !important; /* Líneas blancas visibles sobre el fondo verde */
-        border-radius: 5px;
-        transition: all 0.3s ease;
-    }
-
-    /* Menú lateral móvil corregido */
+    /* Menú lateral que se desliza */
     .nav-menu {
         position: fixed;
-        top: 60px; /* Ajusta exactamente debajo de tu barra verde */
-        right: -100%; /* Totalmente escondido a la derecha por defecto */
+        top: 0;
+        right: -100%; /* Escondido a la derecha */
         flex-direction: column;
-        background-color: var(--verde-principal); /* Mismo verde corporativo */
-        width: 280px; /* Ancho fijo para que no cubra toda la pantalla */
-        height: calc(100vh - 60px); /* Ocupa el resto de la pantalla del celular */
-        padding: 40px 25px;
+        background-color: var(--verde-principal);
+        width: 280px;
+        height: 100vh; /* Ocupa toda la altura de la pantalla */
+        padding: 80px 30px 30px 30px; /* Espacio superior para que no tape el botón */
         box-shadow: -5px 0 15px rgba(0,0,0,0.3);
         transition: right 0.4s cubic-bezier(0.1, 0.8, 0.3, 1);
         align-items: flex-start;
@@ -532,12 +513,11 @@ h2{
         z-index: 2000;
     }
 
-    /* Clase activa que empuja el menú a la pantalla cuando tocas la hamburguesa */
+    /* Clase que añade JavaScript para abrir el menú */
     .nav-menu.active {
         right: 0 !important;
     }
 
-    /* Enlaces dentro del menú móvil */
     .nav-menu li {
         width: 100%;
     }
@@ -545,12 +525,12 @@ h2{
     .nav-menu a {
         display: block;
         width: 100%;
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         padding: 10px 0;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Línea divisoria sutil */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* Bloques de Login / Registro en vertical */
+    /* Grupos de botones internos en el móvil */
     .user-menu-group {
         flex-direction: column;
         align-items: flex-start;
@@ -568,22 +548,18 @@ h2{
     .btn-register {
         background-color: var(--blanco);
         color: var(--verde-principal) !important;
-        text-align: center;
-        width: 100%;
         padding: 12px;
     }
 
     .btn-login {
-        text-align: center;
-        width: 100%;
-        padding: 12px;
         border: 1px solid var(--blanco);
         border-radius: 5px;
+        padding: 12px;
     }
 
-    /* Animación de las tres barras convirtiéndose en X */
+    /* Animación opcional: Transforma las líneas en una 'X' al abrir */
     .nav-toggle.active .bar:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
+        transform: translateY(8px) rotate(45deg);
     }
     .nav-toggle.active .bar:nth-child(2) {
         opacity: 0;
