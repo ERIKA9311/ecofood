@@ -9,14 +9,20 @@
 </head>
 <body>
   
-    <nav class="navbar">
+  <nav class="navbar">
     <div class="nav-container">
         <a href="index.html" class="logo">🌱 ECOFOOD</a>
+        
+        <button class="nav-toggle" id="nav-toggle" aria-label="Abrir menú">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
         
         <ul class="nav-menu" id="nav-menu">
             <li><a href="index.html">Inicio</a></li>
             
-           <li id="menu-invitado" class="user-menu-group">
+            <li id="menu-invitado" class="user-menu-group">
                 <a href="login.html" class="btn-login">Iniciar Sesión</a>
                 <a href="registro.html" class="btn-register">Registrarse</a>
             </li>
@@ -26,10 +32,9 @@
                 <span id="nombre-negocio-nav" class="user-badge"></span>
                 <button onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</button>
             </li>
-            </li>
         </ul>
     </div>
-</nav>
+  </nav>
 
 
 <section class="hero">

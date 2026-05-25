@@ -225,3 +225,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // C. Carga inicial de packs
     cargarPacks();
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const navToggle = document.getElementById("nav-toggle");
+    const navMenu = document.getElementById("nav-menu");
+
+    if (navToggle && navMenu) {
+        navToggle.addEventListener("click", () => {
+            // Añade o quita la clase 'active' al menú y al botón
+            navMenu.classList.toggle("active");
+            navToggle.classList.toggle("active");
+        });
+    }
+});

@@ -204,20 +204,19 @@ button:hover {
 }
 
 .navbar {
-   background-color: var(--verde-principal);
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
-
 .nav-container {
-   max-width: 1200px;
-    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
 }
 
 .logo {
@@ -228,19 +227,36 @@ button:hover {
 }
 
 .nav-menu {
-    list-style: none;
     display: flex;
     align-items: center;
+    list-style: none;
     gap: 20px;
 }
 
-.nav-menu a {
-    color: var(--blanco);
-    text-decoration: none;
-    font-weight: 500;
-    transition: opacity 0.3s;
+.user-menu-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
 }
 
+.nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+.nav-toggle .bar {
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
 .nav-menu a:hover {
     opacity: 0.8;
 }
@@ -456,4 +472,55 @@ button:hover {
 
 h2{
     text-align: center;
+}
+
+@media (max-width: 768px) {
+    .nav-toggle {
+        display: flex; /* Muestra el botón de hamburguesa en celular */
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 60px; /* Ajusta esto según el alto de tu navbar */
+        right: -100%; /* Esconde el menú completamente a la derecha */
+        flex-direction: column;
+        background-color: #ffffff;
+        width: 100%;
+        max-width: 300px; /* Tamaño del menú lateral */
+        height: calc(100vh - 60px);
+        padding: 30px;
+        box-shadow: -4px 0 10px rgba(0,0,0,0.1);
+        transition: right 0.4s ease; /* Efecto deslizante suave */
+        align-items: flex-start;
+        gap: 25px;
+    }
+
+    /* Agrupa los botones uno abajo del otro en el celular */
+    .user-menu-group {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .user-menu-group a, .user-menu-group button {
+        width: 100%;
+        text-align: center;
+    }
+
+   
+    .nav-menu.active {
+        right: 0;
+    }
+
+   
+    .nav-toggle.active .bar:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+    }
+    .nav-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .nav-toggle.active .bar:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
 }
