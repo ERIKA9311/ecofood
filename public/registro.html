@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registro Restaurante - ECOFOOD</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="formulario">
+        <h2>📝 Registrar mi Restaurante</h2>
+        <input type="text" id="nombreNegocio" placeholder="Nombre del Negocio">
+        <input type="email" id="email" placeholder="Correo electrónico">
+        <input type="password" id="password" placeholder="Contraseña">
+        <input type="text" id="ubicacion" placeholder="Dirección en Espinal">
+        <button onclick="registrar()">Crear Cuenta</button>
+        <p><a href="index.html">Volver al inicio</a></p>
+    </div>
+
+    <script>
+        function registrar() {
+           
+                const nombreNegocio= document.getElementById('nombreNegocio').value;
+                const email= document.getElementById('email').value;
+                const password= document.getElementById('password').value;
+                const ubicacion= document.getElementById('ubicacion').value
+            
+
+        if (!nombreNegocio || !email || !password || !ubicacion) {
+            return alert("⚠️ Por favor, completa todos los campos para registrar tu restaurante.");
+        }
+
+        // Revisar formato de correo (que tenga @)
+        if (!email.includes('@')) {
+            return alert("📧 Por favor, ingresa un correo electrónico válido.");
+        }
+
+        // Revisar largo de contraseña (mínimo 6 caracteres por seguridad)
+        if (password.length < 6) {
+            return alert("🔑 La contraseña debe tener al menos 6 caracteres.");
+        }
+
+        // 3. SI PASA LAS VALIDACIONES, ENVIAMOS LOS DATOS
+        const datos = { nombreNegocio, email, password, ubicacion };
+
+            fetch('/api/usuarios/registro', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(datos)
+            })
+            .then(res => {
+                    if (!res.ok) {
+                    return res.json().then(err => { throw new Error(err.mensaje) });
+                }
+                return res.json();
+             })
+            
+            .then(res => {
+                
+                            localStorage.setItem('ecoFoodUser', JSON.stringify(res.usuario));
+                            alert("¡Registro exitoso! Bienvenido a ECOFOOD.");
+                    // Redirigimos AUTOMÁTICAMENTE al panel de control
+                    window.location.href = 'panel.html';
+            })
+
+            .catch(error => {
+            // Si el backend mandó el mensaje de "correo registrado", aquí se muestra
+            alert("❌ Error: " + error.message);
+            });
+        }   
+        
+    </script>
+</body>
+</html>

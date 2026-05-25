@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Control - ECOFOOD</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+    
+
+    <nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">🌱 ECOFOOD</a>
+        
+        <ul class="nav-menu">
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="panel.html" class="active">Mi Panel</a></li>
+
+            <li class="user-menu-group">
+                <span id="nombre-negocio-nav" class="user-badge"></span>
+                <button onclick="cerrarSesion()" style="background: #e74c3c; max-width: 150px; margin-top: 5px;">Cerrar Sesión</button>
+                <!--<button onclick="cerrarSesion()" class="btn-logout">Salir</button> -->
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<header>
+        <h1> </h1>
+        <p>Publica tus excedentes y ayuda al planeta.</p>
+ </header>
+
+    <main>
+        <section class="formulario">
+            <h3>➕ Publicar un nuevo Pack</h3>
+            <p>Rellena los datos del excedente que tienes disponible hoy.</p>
+            <input type="text" id="producto" placeholder="Nombre del pack (ej: 5 panes dulces)">
+            
+            <div class="input-group">
+                <label for="precioOferta">Precio oferta (pasos de 1.000):</label>
+                    <input type="number" 
+                        id="precioOferta" 
+                        placeholder="Ej: 5000" 
+                        step="1000" 
+                        min="1000" 
+                        required>
+            </div>
+            
+                <div class="input-group">
+                     <label for="cantidad">Cantidad disponible:</label>
+            <div style="display: flex; gap: 10px;">
+                <input type="number" id="cantidad" value="1" min="1" style="flex: 1;">
+                
+                <select id="unidadMedida" style="flex: 1; padding: 10px; border-radius: 10px; border: 2px solid #333;">
+                    <option value="unidades">Unidades</option>
+                    <option value="libras">Libras</option>
+                    <option value="kilos">Kilos</option>
+                    <option value="porciones">Porciones</option>
+                </select>
+            </div>
+        </div>
+        
+            <label>Hora de recogida:</label>
+            <div class="rango-hora">
+                <div class="hora-input">
+                    <span>Desde:</span>
+                    <input type="time" id="horaInicio">
+                </div>
+                <div class="hora-input">
+                    <span>Hasta:</span>
+                    <input type="time" id="horaFin">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="direccionRecogida">Dirección de recogida:</label>
+                <input type="text" id="direccionRecogida" placeholder="Ej: Carrera 6 # 10-12, Centro" class="input-texto">
+            </div>
+            <button onclick="enviarPack()">Publicar Pack</button>
+        </section>
+
+        <hr>
+
+        <h2>Tus publicaciones actuales</h2>
+        <div id="lista-packs-propios" class="container">
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Esta función es específica para el panel
+        function publicarDesdePanel() {
+            // Obtenemos los datos del restaurante guardados en el registro
+            const infoRestaurante = JSON.parse(localStorage.getItem('ecoFoodUser'));
+
+        const nuevoPack = {
+        negocio: infoRestaurante.nombreNegocio, // Viene del registro
+        usuario_id: infoRestaurante.id,        // Viene del registro
+        producto: document.getElementById('producto').value,
+        precioOferta: document.getElementById('precioOferta').value,
+        horaRecogida: document.getElementById('horaRecogida').value,
+        direccionRecogida:document.getElementById('direccionRecogida').value
+    };
+
+            if(!infoRestaurante){
+                alert("Primero debes registrarte");
+                window.location.href = 'registro.html';
+                return;
+            }
+
+            
+
+            fetch('/api/packs', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(nuevoPack)
+            })
+            .then(res => res.json())
+            .then(() => {
+                alert('¡Pack publicado con éxito!');
+               window.location.href = 'index.html';
+
+            });
+        }
+
+        // Esta función se ejecuta automáticamente al abrir el panel
+window.onload = () => {
+    const userRaw = localStorage.getItem('ecoFoodUser');
+
+    if (!userRaw) {
+        alert("Por favor, inicia sesión primero");
+        window.location.href = 'login.html';
+        return;
+    }
+        const user = JSON.parse(userRaw);
+    // Cambiamos el título para dar la bienvenida
+    document.querySelector('h1').innerText = `🌱 Bienvenido ${user.nombreNegocio}`;
+
+    // Cargamos sus packs
+    cargarMisPacks(user.id);
+};
+
+function cargarMisPacks(usuarios_id) {
+    fetch(`/api/packs/usuario/${usuarios_id}`)
+        .then(res => res.json())
+        .then(packs => {
+            const contenedor = document.getElementById('lista-packs-propios');
+            contenedor.innerHTML = ''; // Limpiar antes de cargar
+
+            if (packs.length === 0) {
+                contenedor.innerHTML = '<p>Aún no has publicado ningún pack.</p>';
+                return;
+            }
+
+            packs.forEach(pack => {
+                contenedor.innerHTML += `
+                    <div class="card">
+                        <h4>${pack.producto}</h4>
+                        <p>Precio: $${pack.precioOferta}</p>
+                        <div class="badge-cantidad">${pack.cantidad} disponibles</div>
+                        <p>Horario: ${pack.horaRecogida}</p>
+                        <p class="direccion-texto">📍 ${pack.direccionRecogida || 'Dirección no disponible'}</p>
+                        <button style="background:#e74c3c">Eliminar</button>
+                    </div>
+                `;
+            });
+        });
+}
+
+        
+    </script>
+</body>
+</html>

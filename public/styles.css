@@ -1,0 +1,459 @@
+
+:root {
+    --verde-principal: #2e7d32;
+    --verde-claro: #43a047;
+    --verde-fondo: #f1f8e9;
+    --blanco: #ffffff;
+    --gris-fondo: #f4f7f6;
+    --rojo-logout: #e53935;
+    --sombra-suave: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+ background-color: var(--gris-fondo);
+}
+
+main {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+/* Sección Hero */
+.hero {
+    background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+    border-radius: 0 0 50px 50px; /* Curva elegante al final */
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+    line-height: 1.6;
+}
+
+/* Botones del Hero */
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-hero-main {
+    background-color: #ffffff;
+    color: #2e7d32;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-hero-main:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-hero-secondary {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    border: 2px solid white;
+    transition: background 0.3s;
+}
+
+.btn-hero-secondary:hover {
+    background-color: white;
+    color: #2e7d32;
+}
+
+/* Ajuste para dispositivos móviles */
+@media (max-width: 600px) {
+    .hero h1 { font-size: 2rem; }
+    .hero { padding: 50px 15px; }
+}
+h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+header {
+    background-color: var(--blanco);
+    padding: 4rem 1rem;
+    text-align: center;
+    border-bottom: 2px solid var(--verde-fondo);
+}
+
+header h1 {
+    font-size: 3rem;
+    color: var(--verde-principal);
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #666;
+    font-size: 1.2rem;
+}
+
+.formulario {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 400px;
+    margin: 0 auto 30px auto;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.formulario input {
+    display: block;
+    width: 90%;
+    margin: 10px auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+}
+
+.container {
+   display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: var(--blanco);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: var(--sombra-suave);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #eee;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+
+.card h3 {
+    color: #444;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.card strong {
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+
+.price {
+   color: var(--verde-principal);
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin: 15px 0;
+}
+
+button {
+    background-color: #27ae60;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #219150;
+}
+
+.navbar {
+   background-color: var(--verde-principal);
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+   max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+   color: var(--blanco);
+    text-decoration: none;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-menu a {
+    color: var(--blanco);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.nav-menu a:hover {
+    opacity: 0.8;
+}
+
+.badge-cantidad {
+    background-color: var(--verde-fondo);
+    color: var(--verde-principal);
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.selector-compra {
+   display: flex;
+    flex-direction: column; /* Alinea los elementos uno arriba del otro */
+    align-items: center;    /* Centra horizontalmente el contenido */
+    gap: 8px;               /* Espacio entre el texto y el input */
+    margin: 15px 0;
+    padding: 10px;
+    border-top: 1px solid #f0f0f0;
+    width: 100%;
+}
+
+
+.btn-login {
+    color: white !important;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.btn-logout {
+   background-color: var(--rojo-logout);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+
+}
+
+.btn-register {
+    background: white;
+    color: #27ae60 !important; /* Letras verdes */
+    padding: 8px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s;
+   
+}
+
+.btn-register:hover {
+    background: #f0f0f0;
+    transform: scale(1.05);
+}
+
+.user-menu-group {
+    display: flex;        
+    align-items: center;   
+    gap: 10px; 
+    margin: 0;             
+    white-space: nowrap;             
+
+}
+
+#menu-invitado {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+.user-menu-group .user-badge {
+    margin: 0;             
+    white-space: nowrap;  
+}
+
+.user-badge {
+    background-color: rgba(255,255,255,0.2);
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.rango-hora {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.hora-input {
+    flex: 1; /* Hace que ambos ocupen el mismo espacio */
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.hora-input span {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.hora-input input[type="time"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+
+
+.input-reserva {
+   background: linear-gradient(135deg, var(--verde-claro) 0%, var(--verde-principal) 100%);
+    color: white;
+    border: none;
+    width: 25%;
+    padding: 8px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+    transition: border-color 0.3s;
+    text-align: center;
+
+}
+
+.btn-reservar {
+    background: linear-gradient(135deg, var(--verde-claro) 0%, var(--verde-principal) 100%);
+    color: white;
+    border: none;
+    width: 60%;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.modal {
+    position: fixed;
+    z-index: 2000;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+   background-color: white;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 450px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    text-align: center;
+    position: relative;
+}
+
+.total-grande {
+    font-size: 2rem;
+    color: var(--verde-principal);
+    font-weight: 900;
+    margin: 10px 0;
+}
+
+.btn-entendido {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.instrucciones-pago {
+    background: #f1f8e9;;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: left;
+    font-size: 0.95rem;
+    margin: 15px 0;
+    border: 1px dashed #2e7d32;
+}
+
+.instrucciones-pago ul {
+    padding-left: 20px;
+    margin-top: 10px;
+}
+
+.instrucciones-pago li {
+    margin-bottom: 8px; /* Espacio entre cada paso */
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+h2{
+    text-align: center;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECOFOOD - Salva comida</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="data:,">
+</head>
+<body>
+  
+    <nav class="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo">🌱 ECOFOOD</a>
+        
+        <ul class="nav-menu" id="nav-menu">
+            <li><a href="index.html">Inicio</a></li>
+            
+           <li id="menu-invitado" class="user-menu-group">
+                <a href="login.html" class="btn-login">Iniciar Sesión</a>
+                <a href="registro.html" class="btn-register">Registrarse</a>
+            </li>
+
+            <li id="menu-usuario" class="user-menu-group" style="display: none;">
+                <a href="panel.html">Mi Panel</a>
+                <span id="nombre-negocio-nav" class="user-badge"></span>
+                <button onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</button>
+            </li>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<section class="hero">
+    <div class="hero-content">
+        <h1>🌱 ¡No desperdicies, publica hoy!</h1>
+        <p>Convierte tus excedentes de comida en oportunidades para otros y reduce el desperdicio en El Espinal.</p>
+        <div class="hero-buttons">
+            <a href="panel.html" class="btn-hero-main">Publicar Alimentos Ahora</a>
+            <a href="#lista-packs" class="btn-hero-secondary">Ver Packs Disponibles</a>
+        </div>
+    </div>
+</section>
+
+    <main>
+       
+        <hr>
+
+        <h2>Packs Disponibles</h2>
+            <div id="lista-packs" class="container">
+            </div>
+    </main>
+
+    <div id="modalPago" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" onclick="cerrarModal()">&times;</span>
+        <h2>💳 Confirmar Reserva y Pago</h2>
+        <hr>
+        <div id="detalles-pago"></div>
+        <div id="direccion-modal" class="direccion-contenedor"> </div>
+        <div class="instrucciones-pago">
+            <p><strong>Para completar tu pedido:</strong></p>
+            <ul>
+                <li>Realiza la transferencia a <strong>Nequi o Daviplata: 3138435879</strong></li>
+                <li>Toma un pantallazo del comprobante.</li>
+                <li>Presenta el comprobante al recoger tu producto.</li>
+            </ul>
+        </div>
+        <button onclick="location.reload()" class="btn-entendido">¡Entendido, ir a pagar!</button>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+
+    <form action=""></form>
+
+
+</body>
+</html>
