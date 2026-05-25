@@ -94,6 +94,24 @@ const reservarPack = async (req, res) => {
        
 };
 
+const eliminarPack = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        // Ejecutamos la consulta SQL de eliminación utilizando el ID de la ruta
+        const [resultado] = await pool.query('DELETE FROM packs WHERE id = ?', [id]);
+
+        // Si no afectó ninguna fila, significa que ese ID no existía
+        if (resultado.affectedRows === 0) {
+            return res.status(404).json({ mensaje: 'El pack no existe o ya fue eliminado.' });
+        }
+
+        return res.json({ mensaje: '¡Publicación eliminada con éxito!' });
+    } catch (error) {
+        console.error('Error al eliminar el pack:', error);
+        return res.status(500).json({ mensaje: 'Error interno del servidor al eliminar.' });
+    }
+};
 
 
-module.exports = {crearPack, obtenerPacks, obtenerPacksPorUsuario,reservarPack };
+module.exports = {crearPack, obtenerPacks, obtenerPacksPorUsuario,reservarPack,eliminarPack };
