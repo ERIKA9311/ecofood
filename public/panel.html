@@ -173,7 +173,6 @@ function cargarMisPacks(usuarios_id) {
                         <div class="badge-cantidad">${pack.cantidad} disponibles</div>
                         <p>Horario: ${pack.horaRecogida}</p>
                         <p class="direccion-texto">📍 ${pack.direccionRecogida || 'Dirección no disponible'}</p>
-                        // Busca donde se genera tu tarjeta y cambia el botón para que quede así:
                         <button onclick="eliminarProducto(${pack.id})" class="btn-logout" style="width: 100%; margin-top: 10px;"> Eliminar</button>
                     </div>
                 `;
